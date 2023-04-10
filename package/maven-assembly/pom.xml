@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>keenTest-package-parent</artifactId>
+        <groupId>xyz.clzly.package</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>maven-assembly</artifactId>
+
+    <dependencies>
+        <!--log4j2 开始-->
+        <!--本来作用是桥接包，后来查看发现自带了其他依赖，就只留下这个了-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+        </dependency>
+        <!--log4j2 结束-->
+    </dependencies>
+    <build>
+        <!--<finalName>keen</finalName>-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <!--清单-->
+                        <manifest>
+                            <!--指定程序入口，MANIFEST.MF中的Main-Class-->
+                            <mainClass>xyz.clzly.keen.date.KeenDate</mainClass>
+                        </manifest>
+                    </archive>
+
+                    <!--指定自定义的打包方式-->
+                    <!--<descriptors>-->
+                    <!--    <descriptor>src/main/resources/assembly/keen-jar-with-dependencies.xml</descriptor>-->
+                    <!--</descriptors>-->
+
+                    <!--指定默认的打包方式-->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <!--executions标签表示在执行package打包时，执行assembly:single-->
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!--绑定到package生命周期阶段上-->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

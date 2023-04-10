@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="3600">
+    <Appenders>
+        <!-- 定义控制台输出-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-5p - %d{yyyy-MM-dd HH:mm:ss} [%t] %l -- %m%n"/>
+        </Console>
+        <!--fileName  指定当前日志文件的位置和文件名称
+            filePattern  指定当发生Rolling时，文件的转移和重命名规则
+            SizeBasedTriggeringPolicy  指定当文件体积大于size指定的值时，触发Rolling
+            DefaultRolloverStrategy  指定最多保存的文件个数
+            -->
+        <RollingRandomAccessFile name="RollingFile" fileName="/export/Logs/rollingFiles.log"
+                                 filePattern="/export/Logs/rollingFiles-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%-5p - %d{yyyy-MM-dd HH:mm:ss} [%t] %l -- %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="SecurityRollingFile" fileName="/export/Logs/security.log"
+                                 filePattern="/export/Logs/security-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingRandomAccessFile>
+        <Async name="Async">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <!-- 配置SQL以及其他的-->
+        <Logger name="java.sql.Connection" level="error">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="java.sql" level="debug" additivity="false" includeLocation="true">
+            <AppenderRef ref="Async"/>
+        </Logger>
+
+        <Logger name="xyz.clzly" level="INFO" additivity="false" includeLocation="true">
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Root level="INFO" includeLocation="true">
+            <AppenderRef ref="Async"/>
+        </Root>
+    </Loggers>
+</Configuration>

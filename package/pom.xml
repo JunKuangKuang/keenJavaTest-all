@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>xyz.clzly.package</groupId>
+    <artifactId>keenTest-package-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>maven-jar</module>
+        <module>maven-assembly</module>
+        <module>maven-shade</module>
+        <module>maven-onejar</module>
+        <module>maven-springBoot</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j.version>2.16.0</log4j.version>
+        <disruptor.version>3.4.4</disruptor.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--log4j2 开始-->
+            <!--对外Api包，是一种日志框架，单独的话缺少实现无法应用-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!--桥接包log4j-slf4j-impl起到适配的作用，版本须对应log4j-core的版本-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <!--实现包log4j-core是对log4j2的具体实现-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <!-- 额外增加 log4j2 本身的日志门面，在这里加上是为了防止传递依赖的低版本情况 -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!--异步依赖,需要使用log4j2的AsyncLogger需要包含disruptor-->
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+            <!--log4j2 结束-->
+        </dependencies>
+    </dependencyManagement>
+</project>

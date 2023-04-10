@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>keenTest-log-parent</artifactId>
+        <groupId>xyz.clzly.log</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>log4j1</artifactId>
+    <properties>
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j1.version>1.2.17</log4j1.version>
+    </properties>
+    <dependencies>
+        <!--log4j1 开始-->
+        <!--对外Api包，是一种日志框架，单独的话缺少实现无法应用-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!--适配器slf4j-log4j12 起日志门面和日志实现的适配作用，版本需要对应Slf4j的版本-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- log4j1 的实现包-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j1.version}</version>
+        </dependency>
+        <!--log4j1 结束-->
+    </dependencies>
+</project>
