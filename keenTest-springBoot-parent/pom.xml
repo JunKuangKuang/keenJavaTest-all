@@ -19,8 +19,8 @@
     <modules>
         <module>base</module>
         <module>base-utils</module>
-        <module>../log-parent/log4j2-bug/server-web</module>
-        <module>../log-parent/log4j2-bug/hacker-web</module>
+        <module>../keenTest-log-parent/log4j2-bug/server-web</module>
+        <module>../keenTest-log-parent/log4j2-bug/hacker-web</module>
         <module>responsibility-chain</module>
     </modules>
     <!--不修改当前模块的父级项目的话，就要在依赖管理处新增该内容-->
