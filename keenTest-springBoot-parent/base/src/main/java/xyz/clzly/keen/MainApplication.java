@@ -42,10 +42,14 @@ public class MainApplication {
         ConfigurableApplicationContext ctx = new SpringApplicationBuilder(MainApplication.class)
                 .web(WebApplicationType.NONE)
                 .run();
+        // 等价于
+        // SpringApplication springApplication = new SpringApplication(SpringBootApplication.class);
+        // springApplication.setWebApplicationType(WebApplicationType.NONE);
+        // ConfigurableApplicationContext ctx = springApplication.run();
 
         logger.info("君匡匡真了不起！");
 
-        // 退出并结束
+        // 主动结束，如果设置了WebApplicationType.NONE也会自动结束的
         System.out.println("君匡匡真了不起！");
         SpringApplication.exit(ctx, () -> 0);
     }
