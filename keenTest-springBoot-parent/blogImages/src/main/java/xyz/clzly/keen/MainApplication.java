@@ -12,6 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import xyz.clzly.keen.process.BlogHandler;
 
 import java.util.TimeZone;
 
@@ -44,6 +45,12 @@ public class MainApplication {
                 .run();
 
         logger.info("君匡匡真了不起！");
+
+        BlogHandler blogHandler = ctx.getBean(BlogHandler.class);
+        blogHandler.setBlogRootPath("/Volumes/KeenMacPlus/Projects/javaWeb/keenJavaTest-all/keenTest-springBoot-parent/blogImages/src/main/resources");
+        blogHandler.setBlogImagesRootPath("/images");
+        blogHandler.dealImages();
+
 
         // 退出并结束
         System.out.println("君匡匡真了不起！");
