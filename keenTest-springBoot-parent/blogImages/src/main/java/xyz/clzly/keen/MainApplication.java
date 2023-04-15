@@ -13,7 +13,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import xyz.clzly.keen.process.BlogHandler;
+import xyz.clzly.keen.utils.ImagesUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.util.TimeZone;
 
 // 用注解说明这是一个springboot应用
@@ -44,16 +47,24 @@ public class MainApplication {
                 .web(WebApplicationType.NONE)
                 .run();
 
-        logger.info("君匡匡真了不起！");
 
+        // String[] beanDefinitionNames = ctx.getBeanDefinitionNames();   //查询出容器中所有的实例对象名称
+        // for (String beanDefinitionName : beanDefinitionNames) {
+        //     System.out.println(beanDefinitionName);
+        // }
+        long stime = System.currentTimeMillis();
         BlogHandler blogHandler = ctx.getBean(BlogHandler.class);
-        blogHandler.setBlogRootPath("/Volumes/KeenMacPlus/Projects/javaWeb/keenJavaTest-all/keenTest-springBoot-parent/blogImages/src/main/resources");
+        blogHandler.setBlogRootPath("/Volumes/KeenMacPlus/Blog/0keen/public");
         blogHandler.setBlogImagesRootPath("/images");
         blogHandler.dealImages();
 
+        long etime = System.currentTimeMillis();
+
+        logger.info("压缩并添加水印花费了" + (etime - stime) / 1000 + "s");
+
 
         // 退出并结束
-        System.out.println("君匡匡真了不起！");
-        SpringApplication.exit(ctx, () -> 0);
+        logger.info("君匡匡真了不起！");
+
     }
 }
