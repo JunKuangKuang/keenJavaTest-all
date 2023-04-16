@@ -1,4 +1,4 @@
-package xyz.clzly.keen.boxedClass;
+package junkuang.base;
 
 public class Calcsizeof {
     private void calcSize() {

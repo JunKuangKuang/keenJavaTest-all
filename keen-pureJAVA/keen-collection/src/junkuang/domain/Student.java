@@ -1,4 +1,4 @@
-package xyz.clzly.keen.domain;
+package junkuang.domain;
 
 public class Student implements Comparable<Student> {
     private int id;

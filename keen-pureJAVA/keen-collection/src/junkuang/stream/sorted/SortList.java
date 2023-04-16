@@ -1,7 +1,7 @@
-package xyz.clzly.keen.stream.sorted;
+package junkuang.stream.sorted;
 
 
-import xyz.clzly.keen.domain.Student;
+import junkuang.domain.Student;
 
 import java.util.ArrayList;
 import java.util.Comparator;
