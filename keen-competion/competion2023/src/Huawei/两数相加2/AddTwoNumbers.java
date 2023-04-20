@@ -1,4 +1,4 @@
-package Huawei.两数相加;
+package Huawei.两数相加2;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -130,7 +130,3 @@ class ListNode {
         this.next = next;
     }
 }
-
-
-
-
