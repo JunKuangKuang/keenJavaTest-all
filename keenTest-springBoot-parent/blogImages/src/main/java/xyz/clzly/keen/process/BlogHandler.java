@@ -4,6 +4,7 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import xyz.clzly.keen.MainApplication;
@@ -16,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Component
 public class BlogHandler {
@@ -39,7 +41,7 @@ public class BlogHandler {
         this.blogImagesRootPath = blogImagesRootPath;
     }
 
-    private List<String> getImagesPartPathName(String path) {
+    private ConcurrentLinkedQueue<String> getImagesPartPathName(String path) {
         FileUtils fileUtils = new FileUtils();
 
         fileUtils.setPath(path);
@@ -50,16 +52,11 @@ public class BlogHandler {
         fileUtils.setList_filters("icons");
         fileUtils.setList_filters("background-image");
 
-        return fileUtils.getFilesNameByPath();
+        return new ConcurrentLinkedQueue<>(fileUtils.getFilesNameByPath());
     }
 
-    public Boolean dealImages() {
-        if (StringUtils.isEmpty(blogImagesRootPath) || StringUtils.isEmpty(blogRootPath)) {
-            logger.error("blogImagesRootPath或者blogRootPath为空！");
-            return false;
-        }
-
-        List<String> imagesPartPathNameList = getImagesPartPathName(blogRootPath + blogImagesRootPath);
+    @Async("kingAsyncExecutor")
+    public void dealImageItem(ConcurrentLinkedQueue<String> imagesPartPathNameQueue){
         BufferedImage warterImage = null;
 
         try {
@@ -68,14 +65,15 @@ public class BlogHandler {
             throw new RuntimeException(e);
         } finally {
             if (warterImage == null) {
-                return false;
+                return ;
             }
         }
 
         BufferedImage image = null;
         String type = "";
         File file = null;
-        for (String s : imagesPartPathNameList) {
+        while(!imagesPartPathNameQueue.isEmpty()){
+            String s=imagesPartPathNameQueue.poll();
             type = s.substring(s.lastIndexOf('.') + 1);
             if (type.equals("svg")||type.equals("blob")) {
                 continue;
@@ -108,8 +106,19 @@ public class BlogHandler {
                 throw new RuntimeException(e);
             }
         }
+    }
+    public Boolean dealImages() {
+        if (StringUtils.isEmpty(blogImagesRootPath) || StringUtils.isEmpty(blogRootPath)) {
+            logger.error("blogImagesRootPath或者blogRootPath为空！");
+            return false;
+        }
 
+        // List<String> imagesPartPathNameList =
+        ConcurrentLinkedQueue<String> imagesPartPathNameQueue = getImagesPartPathName(blogRootPath + blogImagesRootPath);
+
+        dealImageItem(imagesPartPathNameQueue);
 
         return true;
     }
+
 }

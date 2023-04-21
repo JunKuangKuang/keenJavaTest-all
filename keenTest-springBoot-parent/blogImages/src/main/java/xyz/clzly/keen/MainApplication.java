@@ -12,8 +12,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import xyz.clzly.keen.process.BlogHandler;
 import xyz.clzly.keen.utils.ImagesUtils;
+import xyz.clzly.keen.utils.MemoryUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -31,6 +34,8 @@ import java.util.TimeZone;
         "classpath:start.properties"
 }, ignoreResourceNotFound = false)
 @SpringBootApplication
+@EnableAsync
+@EnableTransactionManagement
 public class MainApplication {
 
     private static Logger logger = LoggerFactory.getLogger(MainApplication.class);
@@ -53,10 +58,12 @@ public class MainApplication {
         //     System.out.println(beanDefinitionName);
         // }
         long stime = System.currentTimeMillis();
+        MemoryUtils.getThreadNum();
         BlogHandler blogHandler = ctx.getBean(BlogHandler.class);
         blogHandler.setBlogRootPath("/Volumes/KeenMacPlus/Blog/0keen/public");
         blogHandler.setBlogImagesRootPath("/images");
         blogHandler.dealImages();
+        MemoryUtils.getThreadNum();
 
         long etime = System.currentTimeMillis();
 
