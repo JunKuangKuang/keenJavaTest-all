@@ -25,12 +25,12 @@ public class KeenJsonUtilTest {
     @Test
     public void write() {
         Demo fileDemo = new Demo(1, "fileDemo");
-        KeenJsonUtil.write(fileDemo, "/Users/junkuang/projects-keen/keenTest-all/keen-utils/src/test/java/xyz/clzly/keen/files", "fileDemo.json");
+        KeenJsonUtil.write(fileDemo, "/Users/junkuang/projects-keen/keenJavaTest-all/keen-utils/src/test/java/xyz/clzly/keen/files", "fileDemo.json");
     }
 
     @Test
     public void read() {
-        String s1 = KeenJsonUtil.read("/Users/junkuang/projects-keen/keenTest-all/keen-utils/src/test/java/xyz/clzly/keen/files/fileDemo.json");
+        String s1 = KeenJsonUtil.read("/Users/junkuang/projects-keen/keenJavaTest-all/keen-utils/src/test/java/xyz/clzly/keen/files/fileDemo.json");
         System.out.println(s1);
     }
 
