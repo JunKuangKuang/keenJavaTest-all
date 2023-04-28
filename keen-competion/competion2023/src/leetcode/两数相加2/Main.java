@@ -1,4 +1,4 @@
-package Huawei.两数相加2;
+package leetcode.两数相加2;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -29,7 +29,7 @@ import java.util.Deque;
         输入数据保证链表代表的数字无前导 0
 
 */
-public class AddTwoNumbers {
+public class Main {
     // 数字最高位位于链表开始位置，每个节点只存储一位数字，
     // 即0~9, 如l1=[3,5,5,8], 链表表示为3->5->5->8
     public static void main(String[] args) {
@@ -112,21 +112,21 @@ public class AddTwoNumbers {
 
         return newRes;
     }
-}
 
-class ListNode {
-    int val;
-    ListNode next;
+    static class ListNode {
+        int val;
+        ListNode next;
 
-    ListNode() {
-    }
+        ListNode() {
+        }
 
-    ListNode(int val) {
-        this.val = val;
-    }
+        ListNode(int val) {
+            this.val = val;
+        }
 
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 }
