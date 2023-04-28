@@ -45,3 +45,9 @@
 	<li><code>num1</code> 和<code>num2</code> 都只包含数字&nbsp;<code>0-9</code></li>
 	<li><code>num1</code> 和<code>num2</code> 都不包含任何前导零</li>
 </ul>
+
+# 题解
+
+首先将两个字符串转成StringBuffer对象，反转之后变成字符数组。
+
+用两个数组的最大值加一来作为结果数组的长度。一个For循环，将同一个两个数组同一个下标的值转成int类型进行相加并记录进位，得到结果数组，之后再将结果数组转成字符串。
