@@ -48,6 +48,6 @@ public class ThreadStop4Keen implements Runnable {
                 System.out.println("子线程结束");
             }
         }
-        System.out.println("主线程结束");
+        System.out.println("junkuang主线程结束");
     }
 }

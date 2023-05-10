@@ -47,6 +47,6 @@ public class ThreadPriority4Keen implements Runnable {
         // t6.setPriority(11);
         // t6.start();
 
-        System.out.println("主线程结束");
+        System.out.println("junkuang主线程结束");
     }
 }

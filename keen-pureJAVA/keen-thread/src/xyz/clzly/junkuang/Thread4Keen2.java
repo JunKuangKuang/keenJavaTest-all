@@ -10,7 +10,7 @@ public class Thread4Keen2 implements Runnable {
     public void run() {
         // run线程
         for (int i = 0; i < 20; i++) {
-            System.out.println("run子线程");
+            System.out.println("junkuang子线程");
         }
     }
 
@@ -21,7 +21,7 @@ public class Thread4Keen2 implements Runnable {
 
         // 主线程
         for (int i = 0; i < 2000; i++) {
-            System.out.println("主");
+            System.out.println("junkuang主线程");
         }
     }
 }

@@ -27,6 +27,6 @@ public class ThreadYield4Keen implements Runnable {
 
         new Thread(threadYield4Keen,"a").start();
         new Thread(threadYield4Keen,"bBBBBBB").start();
-        System.out.println("主线程结束");
+        System.out.println("junkuang主线程结束");
     }
 }

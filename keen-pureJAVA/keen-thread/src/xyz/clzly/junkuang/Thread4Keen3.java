@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 
 /*
  * 方法三
- * 通过实现接口
+ * 通过实现接口Callable将当前类变为线程类
  *
  * */
 public class Thread4Keen3 implements Callable<Boolean> {
@@ -12,7 +12,7 @@ public class Thread4Keen3 implements Callable<Boolean> {
     public Boolean call() throws Exception {
         // run线程
         for (int i = 0; i < 20; i++) {
-            System.out.println("run子线程");
+            System.out.println("junkuang子线程");
         }
         return true;
     }
@@ -40,7 +40,7 @@ public class Thread4Keen3 implements Callable<Boolean> {
 
         // 主线程
         for (int i = 0; i < 2000; i++) {
-            System.out.println("主");
+            System.out.println("junkuang主线程");
         }
 
     }

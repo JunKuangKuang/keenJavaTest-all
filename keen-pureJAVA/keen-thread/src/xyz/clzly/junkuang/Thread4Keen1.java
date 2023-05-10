@@ -11,7 +11,7 @@ public class Thread4Keen1 extends Thread {
     public void run() {
         // run线程
         for (int i = 0; i < 20; i++) {
-            System.out.println("run子线程");
+            System.out.println("junkuang子线程");
         }
     }
 
@@ -19,7 +19,7 @@ public class Thread4Keen1 extends Thread {
         new Thread4Keen1().start();
         // 主线程
         for (int i = 0; i < 2000; i++) {
-            System.out.println("主");
+            System.out.println("junkuang主线程");
         }
     }
 }

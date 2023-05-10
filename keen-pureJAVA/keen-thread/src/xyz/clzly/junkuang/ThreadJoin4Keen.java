@@ -37,6 +37,6 @@ public class ThreadJoin4Keen implements Runnable {
             }
             System.out.println("主线程"+Thread.currentThread().getName()+"      "+i);
         }
-        System.out.println("主线程结束");
+        System.out.println("junkuang主线程结束");
     }
 }
